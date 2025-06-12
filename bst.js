@@ -20,20 +20,24 @@ class Tree {
         if (start > end) {
             return null;
         }
-        console.log(start);
-        console.log(end);
-        console.log(middle);
+        console.log("current node");
+        console.log(`start: ${start}`);
+        console.log(`end: ${end}`);
+        console.log(`middle: ${middle}`);
         // left side
         if (middle - 1 !== null) {
             const leftArray = array.slice(start, middle);
-            console.log(leftArray);
-            // this.buildTree();
+            console.log(`left array: ${leftArray}`);
+            // this.buildTree(leftArray);
         }
-        console.log(array[middle]);
+        
+        console.log(`middle: ${array[middle]}`);
+        
         if (middle + 1 !== null) {
             const rightArray = array.slice(middle + 1, end + 1);
-            console.log(rightArray);
+            console.log(`right array: ${rightArray}`);
         }
+        console.log("\n");
 
         // right side
     }
