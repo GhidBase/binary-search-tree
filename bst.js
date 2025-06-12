@@ -7,40 +7,67 @@ class Node {
 }
 
 class Tree {
-    constructor(root = null) {
-        this.root = root;
+    constructor(array = null) {
+        this.array = array;
+        this.root = this.buildTree(this.array);
     }
 
     buildTree(array) {
         let start = 0;
         let end = array.length - 1;
         let middle = start + Math.floor((end - start) / 2);
+        let leftNode = null;
+        let rightNode = null;
 
         // base case
         if (start > end) {
             return null;
         }
-        console.log("current node");
-        console.log(`start: ${start}`);
-        console.log(`end: ${end}`);
-        console.log(`middle: ${middle}`);
+        // console.log("current node");
+        // console.log(`start: ${start}`);
+        // console.log(`end: ${end}`);
+        // console.log(`middle: ${middle}`);
         // left side
-        if (middle - 1 !== null) {
+        if (array[middle - 1] !== null && array[middle - 1] !== undefined) {
             const leftArray = array.slice(start, middle);
-            console.log(`left array: ${leftArray}`);
-            // this.buildTree(leftArray);
+            // console.log(`left array: ${leftArray}`);
+            rightNode = this.buildTree(leftArray);
         }
-        
-        console.log(`middle: ${array[middle]}`);
-        
-        if (middle + 1 !== null) {
+
+        // console.log(`middle: ${array[middle]}`);
+
+        if (array[middle + 1] !== null && array[middle + 1] !== undefined) {
             const rightArray = array.slice(middle + 1, end + 1);
-            console.log(`right array: ${rightArray}`);
+            // console.log(`right array: ${rightArray}`);
+            leftNode = this.buildTree(rightArray);
         }
-        console.log("\n");
+        // console.log("\n");
+
+        return new Node(array[middle], leftNode, rightNode);
 
         // right side
     }
+
+    prettyPrint = (node, prefix = "", isLeft = true) => {
+        if (node === null) {
+            return;
+        }
+        if (node.right !== null) {
+            prettyPrint(
+                node.right,
+                `${prefix}${isLeft ? "│   " : "    "}`,
+                false
+            );
+        }
+        console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+        if (node.left !== null) {
+            prettyPrint(
+                node.left,
+                `${prefix}${isLeft ? "    " : "│   "}`,
+                true
+            );
+        }
+    };
 }
 
 module.exports = { Node, Tree };
