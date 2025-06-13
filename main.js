@@ -8,4 +8,10 @@ array.sort((a, b) => a - b);
 let tree = new Tree(array);
 // tree.prettyPrint()
 
-prettyPrint(tree.root)
+prettyPrint(tree.root);
+tree.insert(6, tree.root);
+tree.insert(11, tree.root);
+tree.insert(10, tree.root);
+tree.insert(12, tree.root);
+console.log("\n");
+prettyPrint(tree.root);

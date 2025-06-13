@@ -9,6 +9,8 @@ class Node {
 class Tree {
     constructor(array = null) {
         this.array = array;
+        this.array = [...new Set(array)];
+        this.array.sort((a, b) => a - b);
         this.root = this.buildTree(this.array);
     }
 
@@ -31,7 +33,7 @@ class Tree {
         if (array[middle - 1] !== null && array[middle - 1] !== undefined) {
             const leftArray = array.slice(start, middle);
             // console.log(`left array: ${leftArray}`);
-            rightNode = this.buildTree(leftArray);
+            leftNode = this.buildTree(leftArray);
         }
 
         // console.log(`middle: ${array[middle]}`);
@@ -39,13 +41,34 @@ class Tree {
         if (array[middle + 1] !== null && array[middle + 1] !== undefined) {
             const rightArray = array.slice(middle + 1, end + 1);
             // console.log(`right array: ${rightArray}`);
-            leftNode = this.buildTree(rightArray);
+            rightNode = this.buildTree(rightArray);
         }
         // console.log("\n");
 
         return new Node(array[middle], leftNode, rightNode);
 
         // right side
+    }
+
+    insert(value, root) {
+        // base case is an insertion
+
+        // recursive case is when there's a child node
+
+        if (value < root.data) {
+            if (root.left != null) {
+                this.insert(value, root.left);
+            } else {
+                root.left = new Node(value);
+            }
+        } else if (value > root.data) {
+            if (root.right != null) {
+                this.insert(value, root.right);
+            } else {
+                root.right = new Node(value);
+            }
+        }
+        return;
     }
 }
 
