@@ -71,7 +71,50 @@ class Tree {
         insertNode(this.root);
     }
 
-    deleteItem(value) {}
+    deleteItem(value) {
+        const removeNode = (current) => {
+            // find the node we want to remove
+            // if the node is found replace
+            if (current.data > value) {
+                let found = removeNode(current.left);
+                if (found !== undefined) {
+                    current.left = found;
+                }
+            }
+
+            if (current.data < value) {
+                let found = removeNode(current.right);
+                if (found !== undefined) {
+                    current.right = found;
+                }
+            }
+
+            // exit function if match not found here
+            if (current.data != value) {
+                return;
+            }
+
+            // if value is located, figure out how many children
+
+            // if no child
+            if (current.left === null && current.right === null) {
+                return null;
+            }
+
+            // if one child
+            if (current.left === null && current.right !== null) {
+                // return the child to the calling function
+                return current.right;
+            }
+            
+            if (current.left !== null && current.right === null) {
+                // return the child to the calling function
+                return current.left;
+            }
+        };
+
+        removeNode(this.root);
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {

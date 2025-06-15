@@ -14,4 +14,5 @@ tree.insert(11);
 tree.insert(10);
 tree.insert(12);
 console.log("\n");
+tree.deleteItem(7);
 prettyPrint(tree.root);
