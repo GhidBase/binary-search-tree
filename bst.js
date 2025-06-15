@@ -50,26 +50,28 @@ class Tree {
         // right side
     }
 
-    insert(value, root) {
-        // base case is an insertion
-
-        // recursive case is when there's a child node
-
-        if (value < root.data) {
-            if (root.left != null) {
-                this.insert(value, root.left);
-            } else {
-                root.left = new Node(value);
+    insert(value) {
+        const insertNode = (current) => {
+            if (value < current.data) {
+                if (current.left != null) {
+                    insertNode(current.left);
+                } else {
+                    current.left = new Node(value);
+                }
+            } else if (value > current.data) {
+                if (current.right != null) {
+                    insertNode(current.right);
+                } else {
+                    current.right = new Node(value);
+                }
             }
-        } else if (value > root.data) {
-            if (root.right != null) {
-                this.insert(value, root.right);
-            } else {
-                root.right = new Node(value);
-            }
-        }
-        return;
+            return;
+        };
+
+        insertNode(this.root);
     }
+
+    deleteItem(value) {}
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {

@@ -9,9 +9,9 @@ let tree = new Tree(array);
 // tree.prettyPrint()
 
 prettyPrint(tree.root);
-tree.insert(6, tree.root);
-tree.insert(11, tree.root);
-tree.insert(10, tree.root);
-tree.insert(12, tree.root);
+tree.insert(6);
+tree.insert(11);
+tree.insert(10);
+tree.insert(12);
 console.log("\n");
 prettyPrint(tree.root);
