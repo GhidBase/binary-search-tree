@@ -123,7 +123,6 @@ class Tree {
                     return;
                 }
 
-
                 if (nextHighestNode.right !== null) {
                     // if the next highest node has a child
                     // set it's parent's left to that child
@@ -140,6 +139,23 @@ class Tree {
         };
 
         removeNode(this.root);
+    }
+
+    find(value) {
+        const findNode = (current) => {
+            if (current.data > value) {
+                return findNode(current.left);
+            }
+
+            if (current.data < value) {
+                return findNode(current.right);
+            }
+
+            if (current.data == value) {
+                return current;
+            }
+        };
+        return findNode(this.root);
     }
 }
 
