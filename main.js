@@ -19,7 +19,10 @@ console.log("\n");
 // tree.deleteItem(8);
 // tree.deleteItem(3);
 prettyPrint(tree.root);
-// console.log(tree.root)
+
+tree.levelOrder((current)=> {
+    console.log(current.data)
+})
 
 // test with immediate child removal for two child situation
 // test with down-stream child removal for two child situation

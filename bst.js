@@ -157,6 +157,25 @@ class Tree {
         };
         return findNode(this.root);
     }
+
+    levelOrder(callback) {
+        const breadthFirst = (current) => {
+            if (current.left !== null) {
+                queue.push(current.left);
+            }
+            if (current.right !== null) {
+                queue.push(current.right);
+            }
+            // queue.shift();
+            callback(current)
+            return current;
+        };
+
+        let queue = [this.root];
+        for (let i = 0; i < queue.length; i++) {
+            breadthFirst(queue[i]);
+        }
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
