@@ -72,44 +72,70 @@ class Tree {
     }
 
     deleteItem(value) {
+        const findNextHighestNodeParent = (current, parent) => {
+            if (current.left !== null) {
+                return findNextHighestNodeParent(current.left, current);
+            } else {
+                return [current, parent];
+            }
+        };
+
         const removeNode = (current) => {
-            // find the node we want to remove
-            // if the node is found replace
-            if (current.data > value) {
-                let found = removeNode(current.left);
-                if (found !== undefined) {
-                    current.left = found;
+            {
+                if (value < current.data) {
+                    let foundNode = removeNode(current.left);
+                    // if the foundNode had no children just remove it
+                    if (foundNode) {
+                        current.left = null;
+                    }
+                    return;
                 }
-            }
 
-            if (current.data < value) {
-                let found = removeNode(current.right);
-                if (found !== undefined) {
-                    current.right = found;
+                if (value > current.data) {
+                    let foundNode = removeNode(current.right);
+                    // if the foundNode had no children just remove it
+                    if (foundNode) {
+                        current.right = null;
+                    }
+                    return;
                 }
-            }
 
-            // exit function if match not found here
-            if (current.data != value) {
+                // return true if there are no children
+                if (current.left === null && current.right === null) {
+                    return true;
+                }
+
+                // if value == current
+                // find the next highest value and replace this value
+                let nextHighestNode;
+                let nextHighestParent;
+                let find = findNextHighestNodeParent(current.right, current);
+                nextHighestNode = find[0];
+                nextHighestParent = find[1];
+                current.data = nextHighestNode.data;
+
+                // if the nextHighestNode is a direct child
+                // set right to it's right instead to skip it
+                // this works for single child situations and
+                // two child situations
+                if (nextHighestNode == current.right) {
+                    current.right = nextHighestNode.right;
+                    return;
+                }
+
+
+                if (nextHighestNode.right !== null) {
+                    // if the next highest node has a child
+                    // set it's parent's left to that child
+                    // instead of the next highest node
+                    // this should also work for single and two
+                    // child situations
+                    nextHighestParent.left = nextHighestNode.right;
+                } else {
+                    nextHighestParent.left = null;
+                }
+
                 return;
-            }
-
-            // if value is located, figure out how many children
-
-            // if no child
-            if (current.left === null && current.right === null) {
-                return null;
-            }
-
-            // if one child
-            if (current.left === null && current.right !== null) {
-                // return the child to the calling function
-                return current.right;
-            }
-            
-            if (current.left !== null && current.right === null) {
-                // return the child to the calling function
-                return current.left;
             }
         };
 
