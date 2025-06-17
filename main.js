@@ -20,9 +20,11 @@ console.log("\n");
 // tree.deleteItem(3);
 prettyPrint(tree.root);
 
-tree.postOrder((current)=> {
+console.log(tree.depth(7));
+
+/* tree.postOrder((current)=> {
     console.log(current.data)
-})
+}) */
 
 // test with immediate child removal for two child situation
 // test with down-stream child removal for two child situation

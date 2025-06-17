@@ -224,6 +224,31 @@ class Tree {
 
         depthTraverse(this.root);
     }
+
+    depth(value) {
+        const findNode = (current) => {
+            if (current.data > value && current.left) {
+                let currentDepth = findNode(current.left);
+                if (currentDepth !== null) {
+                    return ++currentDepth;
+                }
+            }
+
+            if (current.data < value && current.right) {
+                let currentDepth = findNode(current.right);
+                if (currentDepth !== null) {
+                    return ++currentDepth;
+                }
+            }
+
+            if (current.data == value) {
+                return 0;
+            }
+            return null;
+        };
+
+        return findNode(this.root);
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
