@@ -167,7 +167,7 @@ class Tree {
                 queue.push(current.right);
             }
             // queue.shift();
-            callback(current)
+            callback(current);
             return current;
         };
 
@@ -175,6 +175,54 @@ class Tree {
         for (let i = 0; i < queue.length; i++) {
             breadthFirst(queue[i]);
         }
+    }
+
+    inorder(callback) {
+        const depthTraverse = (current) => {
+            if (current.left !== null) {
+                depthTraverse(current.left);
+            }
+
+            callback(current);
+
+            if (current.right !== null) {
+                depthTraverse(current.right);
+            }
+        };
+
+        depthTraverse(this.root);
+    }
+
+    preorder(callback) {
+        const depthTraverse = (current) => {
+            callback(current);
+
+            if (current.left !== null) {
+                depthTraverse(current.left);
+            }
+
+            if (current.right !== null) {
+                depthTraverse(current.right);
+            }
+        };
+
+        depthTraverse(this.root);
+    }
+
+    postOrder(callback) {
+        const depthTraverse = (current) => {
+            if (current.left !== null) {
+                depthTraverse(current.left);
+            }
+
+            if (current.right !== null) {
+                depthTraverse(current.right);
+            }
+
+            callback(current);
+        };
+
+        depthTraverse(this.root);
     }
 }
 
