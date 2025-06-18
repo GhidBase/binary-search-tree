@@ -20,7 +20,7 @@ console.log("\n");
 // tree.deleteItem(3);
 prettyPrint(tree.root);
 
-console.log(tree.depth(7));
+console.log(tree.height(1));
 
 /* tree.postOrder((current)=> {
     console.log(current.data)

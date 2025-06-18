@@ -249,6 +249,36 @@ class Tree {
 
         return findNode(this.root);
     }
+
+    height(value) {
+        // find the value
+        // then find the height
+        const findNode = (current) => {
+            if (current.data > value) {
+                return findNode(current.left);
+            }
+            if (current.data < value) {
+                return findNode(current.right);
+            }
+            if (current.data == value) {
+                // call the height locator
+                return findHeight(current, 0);
+            }
+        };
+
+        const findHeight = (current, height) => {
+            let leftHeight = current.left
+                ? findHeight(current.left, height) + 1
+                : 0;
+            let rightHeight = current.right
+                ? findHeight(current.right, height) + 1
+                : 0;
+            let h = rightHeight >= leftHeight ? rightHeight : leftHeight;
+            return h;
+        };
+
+        return findNode(this.root);
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
