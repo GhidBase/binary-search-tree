@@ -18,9 +18,12 @@ prettyPrint(tree.root);
 console.log("\n");
 // tree.deleteItem(8);
 // tree.deleteItem(3);
+// tree.insert(8000);
+tree.insert(9000);
+tree.insert(300);
 prettyPrint(tree.root);
 
-console.log(tree.height(1));
+console.log(tree.isBalanced());
 
 /* tree.postOrder((current)=> {
     console.log(current.data)

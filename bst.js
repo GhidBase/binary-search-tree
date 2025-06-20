@@ -279,6 +279,56 @@ class Tree {
 
         return findNode(this.root);
     }
+
+    isBalanced() {
+        // i need to check the height for every node
+        // go through every node and recursively
+        // find each nodes height
+
+        // findHeight returns the current height being tracked
+        // and if the tree is balanced
+
+        // when should it return [height, balanced]
+        // when it's a leaf
+
+        const findHeight = (current) => {
+            let leftBalance;
+            let rightBalance;
+            let max;
+            let balance;
+
+            if (current.left) {
+                leftBalance = findHeight(current.left);
+            }
+
+            if (current.right) {
+                rightBalance = findHeight(current.right);
+            }
+
+            if (!current.right && !current.left) {
+                return [0, true];
+            }
+
+            if (leftBalance && rightBalance) {
+                max = Math.max(leftBalance[0], rightBalance[0]);
+                if (Math.abs(leftBalance[0] - rightBalance[0]) > 1) {
+                    balance = false;
+                } else {
+                    balance = leftBalance[1] && rightBalance[1];
+                }
+            } else if (leftBalance) {
+                max = leftBalance[0];
+                balance = leftBalance[1];
+            } else if (rightBalance) {
+                max = rightBalance[0];
+                balance = rightBalance[1];
+            }
+
+            return [max + 1, balance];
+        };
+
+        return findHeight(this.root);
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
