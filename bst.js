@@ -25,11 +25,6 @@ class Tree {
         if (start > end) {
             return null;
         }
-        // console.log("current node");
-        // console.log(`start: ${start}`);
-        // console.log(`end: ${end}`);
-        // console.log(`middle: ${middle}`);
-        // left side
         if (array[middle - 1] !== null && array[middle - 1] !== undefined) {
             const leftArray = array.slice(start, middle);
             // console.log(`left array: ${leftArray}`);
@@ -329,17 +324,29 @@ class Tree {
 
         return findHeight(this.root);
     }
+
+    rebalance() {
+        let nodeValues = [];
+        this.inorder((current) => {
+            nodeValues.push(current.data);
+        });
+        
+        let newTree = new Tree(nodeValues);
+        
+        
+        this.root = newTree.root;
+    }
 }
 
 function prettyPrint(node, prefix = "", isLeft = true) {
     if (node === null) {
         return;
     }
-    if (node.right !== null) {
+    if (node.right && node.right !== null) {
         prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
     }
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-    if (node.left !== null) {
+    if (node.left && node.left !== null) {
         prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
 }
